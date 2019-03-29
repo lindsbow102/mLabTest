@@ -1,15 +1,32 @@
+$("#scrape").on("click", function() {
+  $.ajax({
+    method: "GET",
+    url: "/scrape"
+  }).then(function(response) {
+    location.reload();
+  })
+})
+
 // Grab the articles as a json
 $.getJSON("/articles", function(data) {
   // For each one
   for (var i = 0; i < data.length; i++) {
     // Display the apropos information on the page
-    $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+    // $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "<br />" + data[i].summary + "</p>");
+    $("#articles").append(`<div class='click-me'>
+    <h4 data-id='${data[i]._id}'>${data[i].title}</h4
+    <br />
+    <a data-id='${data[i]._id}' href='${data[i].link}'>${data[i].link}</a>
+    <br />
+    <p data-id='${data[i]._id}'>Summary: ${data[i].summary}</p>
+    <hr>
+    </div>`);
   }
 });
 
 
 // Whenever someone clicks a p tag
-$(document).on("click", "p", function() {
+$(document).on("click", ".click-me", function() {
   // Empty the notes from the note section
   $("#notes").empty();
   // Save the id from the p tag
@@ -70,3 +87,12 @@ $(document).on("click", "#savenote", function() {
   $("#titleinput").val("");
   $("#bodyinput").val("");
 });
+
+$("#clear").on("click", function() {
+  $.ajax({
+    method: "DELETE",
+    url: "/articles/clear"
+  }).then(function(response) {
+    location.reload();
+  })
+})

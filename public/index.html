@@ -11,6 +11,10 @@
         margin-right: auto;
         padding-top: 5%;
       }
+
+      button {
+        margin: 1rem;
+      }
       #articles {
         display: inline-block;
         overflow: auto;
@@ -38,8 +42,13 @@
   </head>
   <body>
     <div id="wrapper">
-      <h1>Note Scraper</h1>
-      <h2><i>If you can do this...the homework should be no problem.</i></h2>
+      <div id="header">
+          <h1>Reuters Scraper</h1>
+          <h2>Click on an article section to make a note</h2>
+          <button id="scrape">Scrape Reuters Articles</button>
+          <button id="clear">Clear articles</button>
+      </div>
+      
       <div id="articles"></div>
       <div id="notes"></div>
     </div>
